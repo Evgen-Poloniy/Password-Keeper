@@ -1,0 +1,11 @@
+[
+  {
+    "username": "admin",
+    "password_name": "Test",
+    "encrypted_password": "q+/JIs+bj/z4/1q8Qfy+4XbWpj1lkJyJTnRhdUQ9Up0=",
+    "salt": "Ic+7HmnosjoQuOvxSoaddg==",
+    "nonce": "vgpRR76M4Y4rGWMJ",
+    "description": "eee",
+    "date_of_creation": "2025-08-25 23:25:28"
+  }
+]
