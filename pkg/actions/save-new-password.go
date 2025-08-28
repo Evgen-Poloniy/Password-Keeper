@@ -88,8 +88,6 @@ func (act *Action) saveNewPassword() error {
 
 			_, key, _ := keyboard.GetKey()
 
-			etc.ClearConsole()
-
 			switch key {
 			case keyboard.KeyEnter:
 				password, err = enc.GeneratePassword(etc.Settings.PasswordGenerationLenth)
@@ -103,9 +101,9 @@ func (act *Action) saveNewPassword() error {
 			case keyboard.KeyEsc:
 				continue
 			}
-		}
 
-		etc.ClearConsole()
+			etc.ClearConsole()
+		}
 
 		var length int = len(password)
 		if length < 8 || length > 16 {
@@ -114,8 +112,6 @@ func (act *Action) saveNewPassword() error {
 			etc.WaitInput()
 			continue
 		}
-
-		etc.ClearConsole()
 
 		break
 	}
@@ -152,12 +148,12 @@ func (act *Action) saveNewPassword() error {
 			continue
 		}
 
-		data.DateOfCreation = time.Now().Format("2006-01-02 15:04:05")
-
 		break
 	}
 
 	etc.ClearConsole()
+
+	data.DateOfCreation = time.Now().Format("2006-01-02 15:04:05")
 
 	if err := act.saveAtFile(etc.DatabaseFileName, data); err != nil {
 		fmt.Printf("ошибка при сохранении файла \"%s\": %v", etc.DatabaseFileName, err)

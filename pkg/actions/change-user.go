@@ -11,8 +11,9 @@ import (
 var menuChangeUser = []string{
 	"",
 	"\n",
-	"1   - Войти в учетную запись",
-	"2   - Создать новую учетную запись",
+	"1   - Войти в текущую учетную запись",
+	"2   - Войти в существующую учетную запись",
+	"3   - Создать новую учетную запись",
 	"\n",
 	"Esc - выход",
 }
@@ -40,7 +41,7 @@ func (act *Action) changeUser() error {
 			keyboard.Close()
 			etc.ClearConsole()
 
-			if act.IsFirstAuthorization {
+			if act.auth.IsFirstAuthorization {
 				fmt.Println("Выход из программы...")
 				os.Exit(0)
 			}
@@ -56,6 +57,11 @@ func (act *Action) changeUser() error {
 			return act.auth.SignIn()
 
 		case '2':
+			etc.ClearConsole()
+			act.auth.NeedInputUsername = true
+			return act.auth.SignIn()
+
+		case '3':
 			etc.ClearConsole()
 			return act.auth.SignUp()
 

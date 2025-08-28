@@ -10,21 +10,31 @@ import (
 )
 
 func (ath *Authorization) SignIn() error {
+	defer func() {
+		ath.NeedInputUsername = false
+	}()
+
 	scanner := bufio.NewScanner(os.Stdin)
 
 	var user *etc.User
 	var username string
-	for {
-		fmt.Print("Введите имя пользователя: ")
-		scanner.Scan()
-		username = scanner.Text()
-		fmt.Println()
 
-		if username == "" {
-			fmt.Println("Имя пользователя не должно быть пустым")
+	for {
+		if ath.NeedInputUsername {
+			fmt.Print("Введите имя пользователя: ")
+			scanner.Scan()
+			username = scanner.Text()
 			fmt.Println()
-			etc.WaitInput()
-			continue
+
+			if username == "" {
+				fmt.Println("Имя пользователя не должно быть пустым")
+				fmt.Println()
+				etc.WaitInput()
+				continue
+			}
+
+		} else {
+			username = etc.Settings.CurrentUsername
 		}
 
 		var err error
@@ -38,7 +48,24 @@ func (ath *Authorization) SignIn() error {
 			continue
 		}
 
+		if username == user.Username && ath.AllowedPass {
+			etc.ClearConsole()
+			fmt.Printf("Вы уже работайте под учетной записью \"%s\"\n", username)
+			fmt.Println()
+			etc.WaitInput()
+			return nil
+		}
+
 		break
+	}
+
+	if user.Username == "admin" {
+		etc.ClearConsole()
+		fmt.Println("Выполнять действия с этой учетной записи запрещено!")
+		fmt.Println("Создайте новую учетную запись или войдите в существующую")
+		fmt.Println()
+		etc.WaitInput()
+		return nil
 	}
 
 	etc.ClearConsole()
@@ -72,6 +99,9 @@ func (ath *Authorization) SignIn() error {
 	etc.Settings.CurrentUserPasswordHash = user.PasswordHash
 
 	ath.saveConfig(&etc.Settings)
+
+	ath.AllowedPass = true
+	ath.IsFirstAuthorization = false
 
 	return nil
 }

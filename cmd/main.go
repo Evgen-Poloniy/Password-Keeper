@@ -20,8 +20,6 @@ func main() {
 		panic(err)
 	}
 
-	menu.act.IsFirstAuthorization = false
-
 	// ctx, cancel := context.WithCancel(context.Background())
 
 	for {

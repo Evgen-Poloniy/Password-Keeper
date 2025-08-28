@@ -21,8 +21,10 @@ func (act *Action) AuthorizationUser() error {
 		return nil
 	}
 
-	if err := act.changeUser(); err != nil {
-		return err
+	for !act.auth.AllowedPass {
+		if err := act.changeUser(); err != nil {
+			return err
+		}
 	}
 
 	return nil

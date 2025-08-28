@@ -10,16 +10,14 @@ import (
 )
 
 type Action struct {
-	IsFirstAuthorization bool
-	NeedRedrawMenu       bool
-	auth                 *auth.Authorization
+	NeedRedrawMenu bool
+	auth           *auth.Authorization
 }
 
 func NewAction() *Action {
 	return &Action{
-		IsFirstAuthorization: true,
-		NeedRedrawMenu:       true,
-		auth:                 auth.NewAuthorization(),
+		NeedRedrawMenu: true,
+		auth:           auth.NewAuthorization(),
 	}
 }
 
@@ -50,12 +48,12 @@ func (act *Action) ExecuteAction() error {
 	case '3':
 		etc.ClearConsole()
 		// err = act.deletePassword()
-		fmt.Println("Функция удаления еще не реализована до конца. Чтобы удалить пароль, найдите файл \"database.json\"")
-		fmt.Printf("по пути \"%s\" из корневой папки программы и удалите запись вручную.\n", etc.DatabaseFileName)
-		fmt.Println("Помните, что в JSON-формате данные отделены {}, поэтому нужно удалить нужный блок со скобками,")
-		fmt.Println("а разделетельную запятую так же убрать!")
-		fmt.Println()
-		etc.WaitInput()
+		// fmt.Println("Функция удаления еще не реализована до конца. Чтобы удалить пароль, найдите файл \"database.json\"")
+		// fmt.Printf("по пути \"%s\" из корневой папки программы и удалите запись вручную.\n", etc.DatabaseFileName)
+		// fmt.Println("Помните, что в JSON-формате данные отделены {}, поэтому нужно удалить нужный блок со скобками,")
+		// fmt.Println("а разделетельную запятую так же убрать!")
+		// fmt.Println()
+		// etc.WaitInput()
 
 	case '4':
 		etc.ClearConsole()
