@@ -42,12 +42,14 @@ func (act *Action) ExecuteAction() error {
 	case '1':
 		etc.ClearConsole()
 		err = act.saveNewPassword()
+
 	case '2':
 		etc.ClearConsole()
 		err = act.copyTargetPassword()
+
 	case '3':
 		etc.ClearConsole()
-		// err = act.deletePassword()
+		err = act.deletePassword()
 		// fmt.Println("Функция удаления еще не реализована до конца. Чтобы удалить пароль, найдите файл \"database.json\"")
 		// fmt.Printf("по пути \"%s\" из корневой папки программы и удалите запись вручную.\n", etc.DatabaseFileName)
 		// fmt.Println("Помните, что в JSON-формате данные отделены {}, поэтому нужно удалить нужный блок со скобками,")

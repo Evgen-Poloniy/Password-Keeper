@@ -8,10 +8,14 @@ import (
 )
 
 func (act *Action) readData() ([]etc.Data, error) {
-	_, err := os.Stat(etc.DatabaseFileName)
+	fileInfo, err := os.Stat(etc.DatabaseFileName)
 	if os.IsNotExist(err) {
 		fmt.Println("Вы еще не сохранили ни одного пароля")
 		return nil, fmt.Errorf("ошибка: %v", err)
+	}
+
+	if fileInfo.Size() == 0 {
+		return nil, fmt.Errorf("ошибка: файл не содержит данных")
 	}
 
 	file, err := os.OpenFile(etc.DatabaseFileName, os.O_RDONLY, 0644)

@@ -42,13 +42,14 @@ func (ath *Authorization) SignIn() error {
 		if err != nil {
 			return err
 		} else if user == nil {
+			etc.ClearConsole()
 			fmt.Println("Данной учетной записи не существует")
 			fmt.Println()
 			etc.WaitInput()
-			continue
+			return nil
 		}
 
-		if username == user.Username && ath.AllowedPass {
+		if username == etc.Settings.CurrentUsername && ath.AllowedPass {
 			etc.ClearConsole()
 			fmt.Printf("Вы уже работайте под учетной записью \"%s\"\n", username)
 			fmt.Println()

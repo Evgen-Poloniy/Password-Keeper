@@ -70,5 +70,9 @@ func (ath *Authorization) SignUp() error {
 	}
 
 	ath.saveAtFile(etc.UsersFileName, &user)
+
+	ath.AllowedPass = true
+	ath.IsFirstAuthorization = false
+
 	return nil
 }

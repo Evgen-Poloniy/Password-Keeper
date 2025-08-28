@@ -2,7 +2,9 @@ GOOS = windows
 GOARCH = amd64
 BIN_DIR = bin64
 
-APP_NAME = Password-Keeper.exe
+APP_NAME = Password\ keeper.exe
+
+.PHONY: comp run all
 
 comp:
 	CGO_ENABLED=0 GOOS=$(GOOS) GOARCH=$(GOARCH) go build -o ./$(BIN_DIR)/$(APP_NAME) ./cmd

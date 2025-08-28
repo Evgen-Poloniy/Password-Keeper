@@ -1,4 +1,6 @@
-# Password keeper v. 0.5.1
+# Password keeper v. 0.5.2
+
+🌐 **Language**: [English](README.en.md) | [Русский](README.ru.md)
 
 ## Инструкция
 

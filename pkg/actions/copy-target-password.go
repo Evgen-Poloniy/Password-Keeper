@@ -15,6 +15,13 @@ import (
 func (act *Action) copyTargetPassword() error {
 	allData, err := act.readData()
 	if err != nil {
+		if err.Error() == "ошибка: файл не содержит данных" {
+			fmt.Println("У вас нет сохраненных паролей для копирования")
+			fmt.Println()
+			etc.WaitInput()
+			return nil
+		}
+
 		return err
 	}
 
@@ -23,6 +30,13 @@ func (act *Action) copyTargetPassword() error {
 		if dt.Username == etc.Settings.CurrentUsername {
 			data = append(data, dt)
 		}
+	}
+
+	if len(data) == 0 {
+		fmt.Println("У вас нет сохраненных паролей для копирования")
+		fmt.Println()
+		etc.WaitInput()
+		return nil
 	}
 
 	act.printAllData(data)
@@ -34,6 +48,8 @@ func (act *Action) copyTargetPassword() error {
 		fmt.Println("Введите номер строки с паролем или название пароля, который хотите скопировать")
 		scanner.Scan()
 		passwordName = scanner.Text()
+
+		etc.ClearConsole()
 
 		if passwordName == "" {
 			fmt.Println("Номер строки или имя пароля не должно быть пустым. Введите заного")

@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-func (act *Action) saveAtFile(filename string, data interface{}) error {
+func (act *Action) addDataAtFile(filename string, data interface{}) error {
 	file, err := os.OpenFile(filename, os.O_WRONLY|os.O_CREATE, 0644)
 	if err != nil {
 		return fmt.Errorf("ошибка открытия файла: %v", err)

@@ -84,9 +84,10 @@ func (act *Action) saveNewPassword() error {
 				etc.WaitInput()
 				continue
 			}
-			defer keyboard.Close()
 
 			_, key, _ := keyboard.GetKey()
+
+			keyboard.Close()
 
 			switch key {
 			case keyboard.KeyEnter:
@@ -155,7 +156,7 @@ func (act *Action) saveNewPassword() error {
 
 	data.DateOfCreation = time.Now().Format("2006-01-02 15:04:05")
 
-	if err := act.saveAtFile(etc.DatabaseFileName, data); err != nil {
+	if err := act.addDataAtFile(etc.DatabaseFileName, data); err != nil {
 		fmt.Printf("ошибка при сохранении файла \"%s\": %v", etc.DatabaseFileName, err)
 		fmt.Println()
 		etc.WaitInput()

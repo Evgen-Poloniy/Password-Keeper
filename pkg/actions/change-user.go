@@ -11,7 +11,7 @@ import (
 var menuChangeUser = []string{
 	"",
 	"\n",
-	"1   - Войти в текущую учетную запись",
+	"",
 	"2   - Войти в существующую учетную запись",
 	"3   - Создать новую учетную запись",
 	"\n",
@@ -24,6 +24,17 @@ func (act *Action) changeUser() error {
 	for {
 		if needRedrawMenu {
 			etc.ClearConsole()
+
+			if etc.Settings.CurrentUsername == "admin" {
+				menuChangeUser[2] = ""
+			} else {
+				if !act.auth.AllowedPass {
+					menuChangeUser[2] = "1   - Войти в текущую учетную запись"
+				} else {
+					menuChangeUser[2] = ""
+				}
+			}
+
 			etc.PrintMenu(menuChangeUser)
 		}
 
@@ -53,8 +64,23 @@ func (act *Action) changeUser() error {
 
 		switch char {
 		case '1':
-			etc.ClearConsole()
-			return act.auth.SignIn()
+			// if !act.auth.AllowedPass {
+			// 	etc.ClearConsole()
+			// 	return act.auth.SignIn()
+			// }
+
+			if etc.Settings.CurrentUsername == "admin" {
+				needRedrawMenu = false
+				fmt.Printf("\a")
+			} else {
+				if !act.auth.AllowedPass {
+					etc.ClearConsole()
+					return act.auth.SignIn()
+				} else {
+					needRedrawMenu = false
+					fmt.Printf("\a")
+				}
+			}
 
 		case '2':
 			etc.ClearConsole()
