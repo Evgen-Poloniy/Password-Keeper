@@ -2,7 +2,11 @@ GOOS = windows
 GOARCH = amd64
 BIN_DIR = bin64
 
-APP_NAME = Password\ keeper.exe
+ifeq ($(GOOS),windows)
+    APP_NAME = Password\ keeper.exe
+else
+    APP_NAME = Password\ keeper
+endif
 
 .PHONY: comp run all
 
