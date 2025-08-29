@@ -3,30 +3,33 @@ package main
 import (
 	"Password-Keeper/pkg/etc"
 	"fmt"
+	"os"
 )
 
 func main() {
-	// ath := auth.NewAuthorization()
-	// act := actions.NewAction(ath)
-	// menu := NewMenu(act)
-
 	etc.ClearConsole()
+
+	if err := etc.GetPaths(); err != nil {
+		fmt.Printf("%v\n", err)
+		fmt.Println()
+		etc.WaitInput()
+		os.Exit(1)
+	}
 
 	menu := NewMenu()
 
-	menu.checkColorsSupport()
-
 	if err := menu.act.AuthorizationUser(); err != nil {
-		panic(err)
+		fmt.Printf("ошибка при авторизации пользователя: %v\n", err)
+		fmt.Println()
+		etc.WaitInput()
+		os.Exit(1)
 	}
-
-	// ctx, cancel := context.WithCancel(context.Background())
 
 	for {
 		menu.redrawMenu()
 
 		if err := menu.act.ExecuteAction(); err != nil {
-			fmt.Printf("%s%v%s\n", etc.RedColor, err, etc.WhiteColor)
+			fmt.Printf("%v\n", err)
 			fmt.Println()
 			etc.WaitInput()
 		}

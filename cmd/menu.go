@@ -3,7 +3,6 @@ package main
 import (
 	"Password-Keeper/pkg/actions"
 	"Password-Keeper/pkg/etc"
-	"runtime"
 )
 
 var mainMenu = []string{
@@ -35,10 +34,4 @@ func (m *Menu) redrawMenu() {
 	}
 
 	m.act.NeedRedrawMenu = true
-}
-
-func (m *Menu) checkColorsSupport() {
-	if runtime.GOOS == "windows" {
-		etc.ResetColors()
-	}
 }

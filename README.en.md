@@ -1,4 +1,4 @@
-# Password keeper v. 0.5.2
+# Password keeper v. 0.5.4
 
 🌐 **Language**: [English](README.en.md ) / [Russian](README.ru.md )
 
@@ -12,11 +12,13 @@
 
     `In the 'settings.JSON' file, they can only change the 'password_generation_lenth' value, which is responsible for the length of the generated password. It is recommended to leave the value set to 16, but you can vary it from 8 to 16`
 
+    `If you have problems reading the .env file, move it to either the bin (or bin64) folder or the root folder. Comment out some lines and uncomment others`
+
 2. By creating a new account, they will be able to save passwords from Internet resources under it. For each new account, you will need to enter the master password for your current account. It is possible to create new accounts, as well as log in to other accounts if you know the password for them. Each account has access only to its own passwords, but not to anyone else's
 
 3. When saving passwords, be sure to write them down on a physical medium, such as a notebook, because the application may contain flaws that lead to data loss (during the tests, information about the loss was not displayed, but it is strongly recommended to physically save passwords)
 
-4. When you select the "copy password" action, after authentication, the password will be pasted to the clipboard, and you will only need to enter the password in the desired form using Ctrl + V
+4. When you select the "copy password" action, after authentication, the password will be pasted to the clipboard, and you will only need to enter the password in the desired form using "Ctrl + V"
 
 5. When creating a new password, it is possible to generate it randomly. After generation, it will be available for copying
 
