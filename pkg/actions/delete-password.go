@@ -23,10 +23,12 @@ func (act *Action) deletePassword() error {
 		return err
 	}
 
-	data := make([]etc.Data, 0, len(allData))
+	data := make([]etc.Data, len(allData))
+	var i int = 0
 	for _, dt := range allData {
 		if dt.Username == etc.Settings.CurrentUsername {
-			data = append(data, dt)
+			data[i] = dt
+			i++
 		}
 	}
 
@@ -43,7 +45,7 @@ func (act *Action) deletePassword() error {
 	for {
 		act.printAllData(data)
 		fmt.Println()
-		fmt.Println("Введите номер строки с паролем или название пароля, который хотите скопировать")
+		fmt.Println("Введите номер строки с паролем или название пароля, который хотите УДАЛИТЬ")
 		scanner.Scan()
 		passwordName = scanner.Text()
 
@@ -55,14 +57,15 @@ func (act *Action) deletePassword() error {
 			etc.WaitInput()
 			continue
 		}
-		newData := make([]etc.Data, len(allData)-1)
+
+		newData := make([]etc.Data, len(data)-1)
 		positionUint64, err := strconv.ParseUint(passwordName, 10, 32)
 		if err != nil {
 			var isExistRecord bool = false
 			for _, dt := range data {
 				if dt.PasswordName == passwordName {
 
-					var i int = 0
+					var j int = 0
 					for _, t_dt := range allData {
 						if t_dt.Username == etc.Settings.CurrentUsername {
 							if t_dt.PasswordName == passwordName {
@@ -71,8 +74,8 @@ func (act *Action) deletePassword() error {
 							}
 						}
 
-						newData[i] = dt
-						i++
+						newData[j] = dt
+						j++
 					}
 
 				}
@@ -132,7 +135,7 @@ func (act *Action) deletePassword() error {
 		} else {
 			position := int(positionUint64)
 			if position > len(data) {
-				fmt.Printf("Номер строки должен быть меньше %d\n", len(data)+1)
+				fmt.Printf("Номер строки должен быть меньше или равен %d\n", len(data))
 				fmt.Println()
 				etc.WaitInput()
 				continue
@@ -172,7 +175,7 @@ func (act *Action) deletePassword() error {
 				}
 			}
 
-			var i int = 0
+			var j int = 0
 			for _, dt := range allData {
 				if dt.Username == etc.Settings.CurrentUsername {
 					if dt == targetData {
@@ -180,8 +183,8 @@ func (act *Action) deletePassword() error {
 					}
 				}
 
-				newData[i] = dt
-				i++
+				newData[j] = dt
+				j++
 			}
 
 			if err := act.makeBackup(etc.DatabaseFileName, allData); err != nil {
