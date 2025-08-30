@@ -1,1 +1,6 @@
 data/database.json.backup
+data/database.json
+data/settings.json
+data/settings.json.backup
+data/users.json
+data/users.json.backup
