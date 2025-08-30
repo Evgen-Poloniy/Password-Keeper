@@ -1,4 +1,4 @@
-# Password keeper Alpha-v0.5.4
+# Password keeper Alpha-v0.5.5
 
 🌐 **Language**: [English](README.en.md ) / [Russian](README.ru.md )
 
@@ -22,6 +22,8 @@
 
 5. When creating a new password, it is possible to generate it randomly. After generation, it will be available for copying
 
-6. It is used to encrypt passwords using the AES-256 algorithm with a 32-character generated encryption key. The encryption key is created based on the account's master password, a random public generated number, and the key. The master password is stored in hashed form, but it is almost impossible to find out the master password from the hash. The scrypto package is used to generate a password hash based on the SHA-256 hash function
+6. When a password is deleted, a backup of the entire database is created. Each time a new record (password) is deleted, the previous state of the database is saved, overwriting the old backup. All backups are stored in the "data" folder, and the files have the extension ".backup"
+
+7. It is used to encrypt passwords using the AES-256 algorithm with a 32-character generated encryption key. The encryption key is created based on the account's master password, a random public generated number, and the key. The master password is stored in hashed form, but it is almost impossible to find out the master password from the hash. The scrypto package is used to generate a password hash based on the SHA-256 hash function
 
 > Confidentiality of data is ensured
