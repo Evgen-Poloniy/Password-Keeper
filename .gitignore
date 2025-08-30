@@ -1,2 +1,2 @@
-./data/database.json.backup
-./.gitignor
+data/database.json.backup
+.gitignor
