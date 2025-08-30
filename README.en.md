@@ -1,4 +1,4 @@
-# Password keeper v. 0.5.4
+# Password keeper Alpha-v0.5.4
 
 🌐 **Language**: [English](README.en.md ) / [Russian](README.ru.md )
 
@@ -23,7 +23,5 @@
 5. When creating a new password, it is possible to generate it randomly. After generation, it will be available for copying
 
 6. It is used to encrypt passwords using the AES-256 algorithm with a 32-character generated encryption key. The encryption key is created based on the account's master password, a random public generated number, and the key. The master password is stored in hashed form, but it is almost impossible to find out the master password from the hash. The scrypto package is used to generate a password hash based on the SHA-256 hash function
-
-7. To install the application, go to the Git Hub in the "Release" branch and download all the files
 
 > Confidentiality of data is ensured
